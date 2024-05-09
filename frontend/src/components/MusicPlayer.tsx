@@ -1,33 +1,11 @@
 import { ChangeEvent, useRef, useState } from "react";
-import styled from "styled-components";
+import { CollectionButton, Option, Select } from "../styles/styledComponents";
 import intro from "../assets/audio/star-wars-intro.mp3";
 import duelOfFates from "../assets/audio/duel-of-fates.mp3";
 import cantinaBand from "../assets/audio/cantina-band.mp3";
 import imperialMarch from "../assets/audio/imperial-march.mp3";
 import acrossTheStars from "../assets/audio/across-the-stars.mp3";
 import leiasTheme from "../assets/audio/princess-leias-theme.mp3";
-
-const Select = styled.select`
-  background: transparent;
-  color: yellow;
-  padding: 6px 10px;
-  border: solid 2px yellow;
-  border-radius: 2px;
-  outline: none;
-  margin-right: 12px;
-`;
-
-const Option = styled.option`
-  background-color: black;
-`;
-
-const Button = styled.button`
-  background: transparent;
-  color: yellow;
-  padding: 5px 10px;
-  border: solid 2px yellow;
-  border-radius: 2px;
-`;
 
 const MusicPlayer = () => {
   const audioRef = useRef<HTMLMediaElement>(null);
@@ -75,9 +53,9 @@ const MusicPlayer = () => {
             </Option>
           ))}
         </Select>
-        <Button onClick={play}>
+        <CollectionButton onClick={play}>
           {isPlaying ? "Pause Music" : "Play Music"}
-        </Button>
+        </CollectionButton>
         <audio ref={audioRef} src={sounds[selectedSound].src}></audio>
       </div>
     </>

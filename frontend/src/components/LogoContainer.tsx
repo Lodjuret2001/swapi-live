@@ -5,11 +5,15 @@ const Div = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 400px;
+  width: 800px;
   border: 2px solid transparent;
   border-radius: 2px;
   box-shadow: 0 0 2px 2px rgba(255, 255, 0, 0.75);
   margin-top: 50px;
+
+  @media (max-width:1000px){
+    width: 85%;
+  }
 `;
 
 const LogoContainer = ({ children }: { children: ReactNode }) => {
