@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "https://api.pontusnorup.se",
+  baseURL: "https://swapiapi.pontusnorup.se",
 });
 
 export interface Character {
