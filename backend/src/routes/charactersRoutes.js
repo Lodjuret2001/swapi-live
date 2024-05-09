@@ -1,12 +1,7 @@
 import express from "express";
+import CharactersController from "../controllers/CharactersController.js";
 const router = express.Router();
 
-import CharactersController from "../controllers/CharactersController.js";
+router.get("/swapiapp/character", CharactersController.createCharacter);
 
-router.get("/characters", CharactersController.getCharacters);
-router.get("/characters/:id", CharactersController.getCharacter);
-router.post("/characters", CharactersController.createCharacter);
-router.put("/characters", CharactersController.swapCharacters);
-router.delete("/characters/:id", CharactersController.deleteCharacter);
-
-export { router as charactersRoutes };
+export default router;

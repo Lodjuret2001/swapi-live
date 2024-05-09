@@ -1,8 +1,14 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 body {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
+  cursor: url(./assets/images/starwars-cursor.png) 15 15, auto;
+}
+
+button,
+input {
+  cursor: url(./assets/images/starwars-pointer.png) 15 15, pointer;
 }

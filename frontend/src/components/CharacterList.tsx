@@ -1,71 +1,49 @@
-import { Character } from "../services/character-service";
-import styled, { css } from "styled-components";
-
-const Card = styled.div`
-  border: 2px solid transparent;
-  border-radius: 2px;
-  box-shadow: 0 0 1px 1px rgba(255, 255, 0, 0.75);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Button = styled.button<{ $delete?: boolean }>`
-  background: green;
-  border-radius: 3px;
-  border: 1px solid white;
-  color: white;
-  margin: 0.5em 1em;
-  padding: 0.25em 1em;
-
-  &:hover {
-    background: transparent;
-    transition: background-color 0.3s ease;
-  }
-
-  ${(props) =>
-    props.$delete &&
-    css`
-      background: red;
-    `}
-`;
-
-interface Props {
-  characters: Character[];
-  deleteCharacter: (character: Character) => void;
-  handleSelection: (character: Character) => void;
-}
+import { Character } from "../services/apiClient";
+import { Card, CharacterListButton } from "../styles/styledComponents";
 
 const CharacterList = ({
   characters,
-  deleteCharacter,
-  handleSelection,
+  disabledButton,
+  handleSwapCharacter,
+  handleDeleteCharacter,
 }: Props) => {
   return (
-    <div className="flex justify-center mt-6 mb-5">
-      <div className="grid grid-cols-3 w-3/5 bg-yellow gap-3 rounded-md">
+    <div className="flex justify-center mt-6 mb-5 w-full">
+      <div className="grid grid-cols-2 lg:grid-cols-3 w-[85%] bg-yellow gap-3 rounded-md">
         {characters.map((character) => (
-          <Card key={character._id}>
-            <div className=" w-40 h-40 mt-3 overflow-hidden">
+          <Card key={character.name}>
+            <div className="w-[85%] h-[45%] sm:h-[50%] md:h-[55%] mt-3 overflow-hidden flex flex-col items-center">
               <img
                 src={character.imageUrl}
                 className="object-cover w-full h-full rounded-full border-2"
               />
             </div>
-            <div className="ml-1 flex items-center flex-col">
-              <p style={{ color: "white", marginTop: "10px" }}>
+            <div className="flex items-center flex-col">
+              <p className="text-white underline text-xl sm:text-3xl md:text-4xl">
                 {character.name}
               </p>
-              <p style={{ color: "white", fontSize: "10px" }}>
-                "{character.subtitle}"
+              <p className="text-white mt-1 text-sm sm:text-2xl md:text-3xl">
+                {character.subtitle}
               </p>
             </div>
-            <div className="w-full mt-3 mb-3 flex items-center justify-evenly">
-              <Button onClick={() => handleSelection(character)}>Swap</Button>
-              <Button $delete onClick={() => deleteCharacter(character)}>
+            <div className="w-[90%] mt-2 mb-3 flex items-center justify-between">
+              <CharacterListButton
+                onClick={() => handleSwapCharacter(character)}
+                disabled={disabledButton[character.name]}
+                style={{
+                  background: disabledButton[character.name]
+                    ? "transparent"
+                    : "green",
+                }}
+              >
+                Swap
+              </CharacterListButton>
+              <CharacterListButton
+                $delete
+                onClick={() => handleDeleteCharacter(character)}
+              >
                 Delete
-              </Button>
+              </CharacterListButton>
             </div>
           </Card>
         ))}
@@ -73,5 +51,14 @@ const CharacterList = ({
     </div>
   );
 };
+
+interface Props {
+  characters: Character[];
+  disabledButton: {
+    [key: string]: boolean;
+  };
+  handleSwapCharacter: (character: Character) => void;
+  handleDeleteCharacter: (character: Character) => void;
+}
 
 export default CharacterList;
