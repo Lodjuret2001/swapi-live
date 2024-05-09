@@ -12,7 +12,15 @@ const Background = () => {
 
   return (
     <>
-      <Video autoPlay loop muted ref={videoRef} onPlay={handleVideo}>
+      <Video
+        autoPlay={true}
+        loop={true}
+        muted
+        controls={false}
+        playsInline
+        ref={videoRef}
+        onPlay={handleVideo}
+      >
         <source src={videoSource} type="video/mp4"></source>
       </Video>
     </>
